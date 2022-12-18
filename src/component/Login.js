@@ -32,8 +32,9 @@ export default function SignIn() {
                 const foundItem = userData.find((element) => {
                         return (
                           element.Email == useremail)
-                    }   
+                    }
                 )
+                    console.log(foundItem)
 
                 if (foundItem === undefined || useremail !== foundItem.Email){
                     setErroruserlogin('Email or password incorrect')
@@ -45,7 +46,7 @@ export default function SignIn() {
                     setColorpassword('red')
                 }
 
-                if ( useremail === foundItem.Email){
+                if ( foundItem !== undefined && useremail === foundItem.Email){
                     if (userpassword === foundItem.password){
                         setUseremail('')
                         setUserpassword('')

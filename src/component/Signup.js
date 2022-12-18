@@ -36,33 +36,39 @@ export default function Signup() {
         password : userpassword
     }
 
-
     const isemail = () => {
         const re = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
     
-        const long = userData.length
-
-        const check = () =>{
-            for ( let i  = 0 ; i < long ; i++){
-                if (userData[i].Email.includes(!useremail)) {
-                    setUsercheck('correct')
-                } else {
-                    setUsercheck('fail')
-                }
-            }
+        const foundItem = userData.find((element) => {
+                            return ( element.Email == useremail)
+                            }
+                          )
+        
+        
+        if (foundItem === undefined ){
+              setErroruseremail('Correct')
+              setColoruseremail('green')
+        } else if (useremail === foundItem.Email) {
+              setErroruseremail('This email already use')
+              setColoruseremail('red')
         }
-        check()
 
-        if (re.test(newdata.Email)){
-                setErroruseremail('correct')
-                setColoruseremail('green')
+        if (foundItem === undefined ){
+            if (re.test(newdata.Email)){
+              setErroruseremail('Correct')
+              setColoruseremail('green')
             } else {
-                setErroruseremail('Your email must be at least 8 characters including a lowercase letter, an uppercase letter, and a number')
-                setColoruseremail('red')
+              setErroruseremail('Your email must be at least 8 characters including a lowercase letter, an uppercase letter, and a number')
+              setColoruseremail('red')
+            }
+        } else if (useremail === foundItem.Email) {
+            setErroruseremail('This email already use')
+            setColoruseremail('red')
         }
+
 
         if (re.test(newdata.password)){
-            setErrorpassword('correct')
+            setErrorpassword('Correct')
             setColorpassword('green')
         } else {
             setErrorpassword('Your password must be at least 8 characters including a lowercase letter, an uppercase letter, and a number')
@@ -70,14 +76,14 @@ export default function Signup() {
         }
 
         if (userpassword === userrepassword &&  {colorpassword} !== 'red'){
-            setErorrepassword('correct')
+            setErorrepassword('Correct')
             setColorrepassword('green')
         } else {
-            setErorrepassword('not correct')
+            setErorrepassword('Not correct')
             setColorrepassword('red')
         }
                 
-        if ([erroruseremail , errorpassword , errorrepassword ].every(x => x == 'correct')){
+        if ([erroruseremail , errorpassword , errorrepassword ].every(x => x == 'Correct')){
             setUserData([...userData, newdata])
             setUseremail('')
             setUserpassword('')
@@ -95,6 +101,7 @@ export default function Signup() {
     }
     
     isemail()
+    
   };
 
   return (

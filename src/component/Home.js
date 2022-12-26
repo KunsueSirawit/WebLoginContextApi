@@ -1,18 +1,13 @@
 import Navbar from "./navbar";
-import Body from './body'
-import Footer from "./footer";
-import { useContext } from "react"
-import { DataContext } from "../App"
+import Body from "./body";
 
+const Home = () => {
+  return (
+    <>
+      <Navbar />
+      <Body />
+    </>
+  );
+};
 
-const Home = () =>{
-
-    return (
-        <>
-            <Navbar/>
-            <Body/>
-        </>
-    )
-}
-
-export default Home 
+export default Home;
